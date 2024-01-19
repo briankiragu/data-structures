@@ -20,7 +20,7 @@ const createLinkedListStack = (): LinkedListStack => {
   let size: number = 0;
   let head: LinkedListNode | undefined = undefined;
 
-  const push = (value: number | string) => {
+  const push = (value: number | string): void => {
     const node = createLinkedListNode(value);
 
     if (head === undefined) {
@@ -46,9 +46,7 @@ const createLinkedListStack = (): LinkedListStack => {
     return node.value;
   };
 
-  const peek = (): number | string | undefined => {
-    return head?.value;
-  };
+  const peek = (): number | string | undefined => head?.value;
 
   const display = (): void => {
     let output = '';
