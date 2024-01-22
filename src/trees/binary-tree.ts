@@ -1,7 +1,3 @@
-import createLinkedListStack, {
-  type LinkedListStack,
-} from '../linked-lists/linked-list-stack';
-
 export type TreeNode = {
   left?: TreeNode;
   value: number | string;
@@ -9,46 +5,48 @@ export type TreeNode = {
 };
 
 export type Tree = {
-  toString: () => string;
+  serialise: () => string;
 };
 
-const createTreeNode = (value: number | string) => ({
+const createTreeNode = (
+  value: number | string,
+  left?: TreeNode,
+  right?: TreeNode
+) => ({
+  left,
   value,
+  right,
 });
 
+// `(5(10(2,333),11(4,6)))`
+// [  "(", "5 ", "(", "10 ", "(", "2", ",", " 333", ")", ",", " 11 ", "(", "4", ",", " 6", ")", ")", ")"]
 const createBinaryTree = (input: string): Tree => {
-  let head: TreeNode | undefined = undefined;
-  const stack: LinkedListStack = createLinkedListStack();
+  const delimiters = RegExp(/([(),])/);
+  const parts = input.split(delimiters).filter((char) => char.trim());
+  const node: TreeNode | undefined = undefined;
+  console.dir(parts);
 
-  input
-    .replace(/\s/g, '')
-    .split(/,|\(|\)/)
-    .forEach((char) => {
-      switch (char) {
-        case '(': {
-          stack.push(char);
-          break;
-        }
-        case ')': {
-          stack.pop();
-          break;
-        }
-        default: {
-          const node = createTreeNode(char);
-
-          if (head === undefined) {
-            head = node;
-          }
-          break;
-        }
+  for (let index = 0; index < parts.length; index++) {
+    switch (parts[index]) {
+      case '(': {
+        break;
       }
-    });
 
-  const toString = (): string => {
-    return ``;
+      case ')': {
+        break;
+      }
+
+      default: {
+        break;
+      }
+    }
+  }
+
+  console.dir(node);
+
+  return {
+    serialise: (): string => ``,
   };
-
-  return { toString };
 };
 
 export default createBinaryTree;
